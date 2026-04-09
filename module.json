@@ -4,8 +4,8 @@
   "description": "A complete void ship battle system for Dark Heresy 2e with Rogue Trader rules. Adds Void Ship actor sheets, tactical battle overlay, weapon systems, and full naval combat automation.",
   "version": "1.0.0",
   "compatibility": {
-    "minimum": "11",
-    "verified": "12"
+    "minimum": "13",
+    "verified": "14"
   },
   "authors": [{ "name": "Claude AI / Galivent" }],
   "esmodules": ["scripts/main.js"],
