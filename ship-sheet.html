@@ -1,0 +1,532 @@
+<form class="void-ship-sheet" autocomplete="off">
+
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER — Ship Name, Class, Portrait
+  ════════════════════════════════════════════════════════════ -->
+  <header class="vcs-header">
+    <div class="vcs-header-left">
+      <div class="vcs-name-block">
+        <label class="vcs-field-label">Vessel Name</label>
+        <input class="vcs-name-input" type="text" name="name" value="{{actor.name}}" placeholder="Name your vessel..."/>
+      </div>
+      <div class="vcs-class-row">
+        <div class="vcs-field-group">
+          <label class="vcs-field-label">Class</label>
+          <input type="text" name="system.class" value="{{system.class}}" placeholder="e.g. Sword-class"/>
+        </div>
+        <div class="vcs-field-group">
+          <label class="vcs-field-label">Type</label>
+          <select name="system.type">
+            <option value="fighter" {{selectOptions system.type selected="fighter"}}>Fighter</option>
+            <option value="raider" {{selectOptions system.type selected="raider"}}>Raider</option>
+            <option value="frigate" {{selectOptions system.type selected="frigate"}}>Frigate</option>
+            <option value="cruiser" {{selectOptions system.type selected="cruiser"}}>Cruiser</option>
+            <option value="battlecruiser" {{selectOptions system.type selected="battlecruiser"}}>Battlecruiser</option>
+            <option value="grandcruiser" {{selectOptions system.type selected="grandcruiser"}}>Grand Cruiser</option>
+            <option value="battleship" {{selectOptions system.type selected="battleship"}}>Battleship</option>
+          </select>
+        </div>
+        <div class="vcs-field-group">
+          <label class="vcs-field-label">Faction</label>
+          <select name="system.faction">
+            <option value="imperium">Imperium</option>
+            <option value="chaos">Chaos</option>
+            <option value="eldar">Eldar</option>
+            <option value="ork">Ork</option>
+            <option value="tau">Tau</option>
+            <option value="neutral">Neutral / Rogue Trader</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="vcs-portrait-block">
+      <img class="vcs-portrait" src="{{actor.img}}" data-edit="img" title="Click to change ship image"/>
+      <div class="vcs-portrait-label">Ship Portrait</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TABS
+  ════════════════════════════════════════════════════════════ -->
+  <nav class="vcs-tabs">
+    <a class="vcs-tab item" data-tab="stats">⚙ Profile</a>
+    <a class="vcs-tab item" data-tab="weapons">⚔ Armament</a>
+    <a class="vcs-tab item" data-tab="components">🔧 Components</a>
+    <a class="vcs-tab item" data-tab="crew">👤 Crew</a>
+    <a class="vcs-tab item" data-tab="history">📜 History</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB: PROFILE / STATS
+  ════════════════════════════════════════════════════════════ -->
+  <section class="vcs-tab-content tab-stats">
+
+    <div class="vcs-two-col">
+
+      <!-- LEFT: Combat Stats -->
+      <div class="vcs-card">
+        <div class="vcs-card-title">⚡ Combat Statistics</div>
+
+        <!-- Hull Integrity -->
+        <div class="vcs-stat-block">
+          <div class="vcs-stat-header">
+            <span class="vcs-stat-name">Hull Integrity</span>
+            <div class="vcs-stat-values">
+              <input class="vcs-stat-cur" type="number" name="system.hull.value" value="{{system.hull.value}}" min="0"/>
+              <span class="vcs-stat-sep">/</span>
+              <input class="vcs-stat-max" type="number" name="system.hull.max" value="{{system.hull.max}}" min="0"/>
+            </div>
+          </div>
+          <div class="vcs-bar-track">
+            <div class="vcs-bar-fill vcs-bar-hull" style="width: {{hullPercent}}%"></div>
+          </div>
+        </div>
+
+        <!-- Void Shields -->
+        <div class="vcs-stat-block">
+          <div class="vcs-stat-header">
+            <span class="vcs-stat-name">Void Shields</span>
+            <div class="vcs-stat-values">
+              <input class="vcs-stat-cur" type="number" name="system.shields.value" value="{{system.shields.value}}" min="0"/>
+              <span class="vcs-stat-sep">/</span>
+              <input class="vcs-stat-max" type="number" name="system.shields.max" value="{{system.shields.max}}" min="0"/>
+            </div>
+          </div>
+          <div class="vcs-bar-track">
+            <div class="vcs-bar-fill vcs-bar-shield" style="width: {{shieldPercent}}%"></div>
+          </div>
+        </div>
+
+        <!-- Crew Integrity -->
+        <div class="vcs-stat-block">
+          <div class="vcs-stat-header">
+            <span class="vcs-stat-name">Crew Integrity</span>
+            <div class="vcs-stat-values">
+              <input class="vcs-stat-cur" type="number" name="system.crew.value" value="{{system.crew.value}}" min="0"/>
+              <span class="vcs-stat-sep">/</span>
+              <input class="vcs-stat-max" type="number" name="system.crew.max" value="{{system.crew.max}}" min="0"/>
+            </div>
+          </div>
+          <div class="vcs-bar-track">
+            <div class="vcs-bar-fill vcs-bar-crew" style="width: {{crewPercent}}%"></div>
+          </div>
+        </div>
+
+        <!-- Morale -->
+        <div class="vcs-stat-block">
+          <div class="vcs-stat-header">
+            <span class="vcs-stat-name">Morale</span>
+            <div class="vcs-stat-values">
+              <input class="vcs-stat-cur" type="number" name="system.morale.value" value="{{system.morale.value}}" min="0"/>
+              <span class="vcs-stat-sep">/</span>
+              <input class="vcs-stat-max" type="number" name="system.morale.max" value="{{system.morale.max}}" min="0"/>
+            </div>
+          </div>
+          <div class="vcs-bar-track">
+            <div class="vcs-bar-fill vcs-bar-morale" style="width: {{moralePercent}}%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Ship Profile -->
+      <div class="vcs-card">
+        <div class="vcs-card-title">📐 Ship Profile</div>
+        <div class="vcs-profile-grid">
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Speed</span>
+            <input class="vcs-profile-val" type="number" name="system.speed" value="{{system.speed}}"/>
+            <span class="vcs-profile-unit">VU/turn</span>
+          </div>
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Manoeuvrability</span>
+            <input class="vcs-profile-val" type="number" name="system.manoeuvrability" value="{{system.manoeuvrability}}"/>
+            <span class="vcs-profile-unit">modifier</span>
+          </div>
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Detection</span>
+            <input class="vcs-profile-val" type="number" name="system.detection" value="{{system.detection}}"/>
+            <span class="vcs-profile-unit">modifier</span>
+          </div>
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Turret Rating</span>
+            <input class="vcs-profile-val" type="number" name="system.turrets" value="{{system.turrets}}"/>
+            <span class="vcs-profile-unit">turrets</span>
+          </div>
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Armour</span>
+            <input class="vcs-profile-val" type="number" name="system.armour" value="{{system.armour}}"/>
+            <span class="vcs-profile-unit">points</span>
+          </div>
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Space Used</span>
+            <input class="vcs-profile-val" type="number" name="system.spaceUsed" value="{{system.spaceUsed}}"/>
+            <span class="vcs-profile-unit">/ <input type="number" name="system.spaceMax" value="{{system.spaceMax}}" style="width:36px;"/></span>
+          </div>
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Power Used</span>
+            <input class="vcs-profile-val" type="number" name="system.powerUsed" value="{{system.powerUsed}}"/>
+            <span class="vcs-profile-unit">/ <input type="number" name="system.powerMax" value="{{system.powerMax}}" style="width:36px;"/></span>
+          </div>
+
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Crew Rating (BS)</span>
+            <input class="vcs-profile-val" type="number" name="system.crewRating" value="{{system.crewRating}}"/>
+            <span class="vcs-profile-unit">base</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Crew Skills Row -->
+    <div class="vcs-card vcs-card-full">
+      <div class="vcs-card-title">🎯 Command Skills (used for battle actions)</div>
+      <div class="vcs-skills-grid">
+        <div class="vcs-skill">
+          <label>Command</label>
+          <input type="number" name="system.skills.command" value="{{system.skills.command}}"/>
+        </div>
+        <div class="vcs-skill">
+          <label>Pilot (Space)</label>
+          <input type="number" name="system.skills.pilot" value="{{system.skills.pilot}}"/>
+        </div>
+        <div class="vcs-skill">
+          <label>Navigate (Stellar)</label>
+          <input type="number" name="system.skills.navigate" value="{{system.skills.navigate}}"/>
+        </div>
+        <div class="vcs-skill">
+          <label>Tech-Use</label>
+          <input type="number" name="system.skills.techUse" value="{{system.skills.techUse}}"/>
+        </div>
+        <div class="vcs-skill">
+          <label>Ballistic Skill</label>
+          <input type="number" name="system.skills.ballisticSkill" value="{{system.skills.ballisticSkill}}"/>
+        </div>
+        <div class="vcs-skill">
+          <label>Scrutiny</label>
+          <input type="number" name="system.skills.scrutiny" value="{{system.skills.scrutiny}}"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Battle Actions -->
+    <div class="vcs-card vcs-card-full">
+      <div class="vcs-card-title">⚔ Quick Battle Actions</div>
+      <div class="vcs-action-bar">
+        <button type="button" class="vcs-action-btn vcs-btn-primary" data-action="lock-on">
+          🎯 Lock On (+20 BS)
+        </button>
+        <button type="button" class="vcs-action-btn vcs-btn-primary" data-action="evasive">
+          💨 Evasive Manoeuvres
+        </button>
+        <button type="button" class="vcs-action-btn vcs-btn-primary" data-action="come-to-new-course">
+          🧭 Come to New Course
+        </button>
+        <button type="button" class="vcs-action-btn vcs-btn-primary" data-action="brace">
+          🛡 Brace for Impact
+        </button>
+        <button type="button" class="vcs-action-btn vcs-btn-danger" data-action="fire-all">
+          🔥 Fire All Weapons!
+        </button>
+        <button type="button" class="vcs-action-btn vcs-btn-danger" data-action="ram">
+          ⚡ Ram
+        </button>
+        <button type="button" class="vcs-action-btn" data-action="repair">
+          🔧 Damage Control
+        </button>
+        <button type="button" class="vcs-action-btn vcs-btn-open-battle" data-action="open-battle">
+          🗺 Open Void Battle Map
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB: WEAPONS / ARMAMENT
+  ════════════════════════════════════════════════════════════ -->
+  <section class="vcs-tab-content tab-weapons" style="display:none;">
+
+    <div class="vcs-card vcs-card-full">
+      <div class="vcs-card-title">
+        ⚔ Weapon Components
+        <button type="button" class="vcs-add-btn" data-action="add-weapon">+ Add Weapon</button>
+      </div>
+
+      <table class="vcs-weapon-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Str</th>
+            <th>Damage</th>
+            <th>Crit</th>
+            <th>Range</th>
+            <th>Qualities</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each system.weapons as |weapon key|}}
+          <tr class="vcs-weapon-row {{if weapon.damaged 'weapon-damaged'}} {{if weapon.destroyed 'weapon-destroyed'}}">
+            <td><input type="text" name="system.weapons.{{key}}.name" value="{{weapon.name}}" placeholder="Weapon name"/></td>
+            <td>
+              <select name="system.weapons.{{key}}.location">
+                <option value="prow" {{selectOptions weapon.location selected="prow"}}>Prow</option>
+                <option value="port" {{selectOptions weapon.location selected="port"}}>Port</option>
+                <option value="starboard" {{selectOptions weapon.location selected="starboard"}}>Starboard</option>
+                <option value="dorsal" {{selectOptions weapon.location selected="dorsal"}}>Dorsal</option>
+                <option value="keel" {{selectOptions weapon.location selected="keel"}}>Keel</option>
+                <option value="aft" {{selectOptions weapon.location selected="aft"}}>Aft</option>
+              </select>
+            </td>
+            <td><input type="number" name="system.weapons.{{key}}.strength" value="{{weapon.strength}}" min="1" max="20"/></td>
+            <td><input type="text" name="system.weapons.{{key}}.damage" value="{{weapon.damage}}" placeholder="1d10+2"/></td>
+            <td><input type="number" name="system.weapons.{{key}}.crit" value="{{weapon.crit}}" min="1" max="10"/></td>
+            <td><input type="number" name="system.weapons.{{key}}.range" value="{{weapon.range}}" min="1"/></td>
+            <td><input type="text" name="system.weapons.{{key}}.qualities" value="{{weapon.qualities}}" placeholder="e.g. Accurate, Lance"/></td>
+            <td>
+              <select name="system.weapons.{{key}}.status">
+                <option value="ok" {{selectOptions weapon.status selected="ok"}}>OK</option>
+                <option value="damaged" {{selectOptions weapon.status selected="damaged"}}>Damaged</option>
+                <option value="destroyed" {{selectOptions weapon.status selected="destroyed"}}>Destroyed</option>
+              </select>
+            </td>
+            <td>
+              <button type="button" class="vcs-fire-btn" data-weapon-key="{{key}}" data-action="fire-weapon">🔥 Fire</button>
+              <button type="button" class="vcs-del-btn" data-weapon-key="{{key}}" data-action="delete-weapon">✕</button>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      {{#unless system.weapons}}
+      <div class="vcs-empty-notice">No weapons configured. Click "+ Add Weapon" to add macrocannons, lance batteries, torpedoes, and more.</div>
+      {{/unless}}
+    </div>
+
+    <!-- Torpedo Ammo tracker -->
+    <div class="vcs-card">
+      <div class="vcs-card-title">🚀 Torpedo Loadout</div>
+      <div class="vcs-profile-grid">
+        <div class="vcs-profile-stat">
+          <span class="vcs-profile-label">Torpedoes Remaining</span>
+          <input class="vcs-profile-val" type="number" name="system.torpedoes.value" value="{{system.torpedoes.value}}" min="0"/>
+          <span class="vcs-profile-unit">/ <input type="number" name="system.torpedoes.max" value="{{system.torpedoes.max}}" style="width:36px;"/></span>
+        </div>
+        <div class="vcs-profile-stat">
+          <span class="vcs-profile-label">Torpedo Type</span>
+          <input type="text" name="system.torpedoes.type" value="{{system.torpedoes.type}}" placeholder="e.g. Plasma, Guided"/>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB: COMPONENTS
+  ════════════════════════════════════════════════════════════ -->
+  <section class="vcs-tab-content tab-components" style="display:none;">
+
+    <div class="vcs-two-col">
+
+      <!-- Essential Components -->
+      <div class="vcs-card">
+        <div class="vcs-card-title">
+          ⚙ Essential Components
+          <button type="button" class="vcs-add-btn" data-action="add-essential">+ Add</button>
+        </div>
+        <div class="vcs-component-list" id="essential-components">
+          {{#each system.essentialComponents as |comp key|}}
+          <div class="vcs-component-row">
+            <div class="vcs-comp-status-dot status-{{comp.status}}"></div>
+            <input type="text" name="system.essentialComponents.{{key}}.name" value="{{comp.name}}" placeholder="Component name"/>
+            <input type="text" name="system.essentialComponents.{{key}}.bonus" value="{{comp.bonus}}" placeholder="Bonus/Effect" style="width:120px;"/>
+            <select name="system.essentialComponents.{{key}}.status" class="vcs-comp-status-select">
+              <option value="ok" {{selectOptions comp.status selected="ok"}}>OK</option>
+              <option value="damaged" {{selectOptions comp.status selected="damaged"}}>Damaged</option>
+              <option value="destroyed" {{selectOptions comp.status selected="destroyed"}}>Destroyed</option>
+            </select>
+            <button type="button" class="vcs-del-btn" data-key="{{key}}" data-type="essential" data-action="delete-component">✕</button>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Supplemental Components -->
+      <div class="vcs-card">
+        <div class="vcs-card-title">
+          🔩 Supplemental Components
+          <button type="button" class="vcs-add-btn" data-action="add-supplemental">+ Add</button>
+        </div>
+        <div class="vcs-component-list" id="supplemental-components">
+          {{#each system.supplementalComponents as |comp key|}}
+          <div class="vcs-component-row">
+            <div class="vcs-comp-status-dot status-{{comp.status}}"></div>
+            <input type="text" name="system.supplementalComponents.{{key}}.name" value="{{comp.name}}" placeholder="Component name"/>
+            <input type="text" name="system.supplementalComponents.{{key}}.bonus" value="{{comp.bonus}}" placeholder="Bonus/Effect" style="width:120px;"/>
+            <select name="system.supplementalComponents.{{key}}.status" class="vcs-comp-status-select">
+              <option value="ok" {{selectOptions comp.status selected="ok"}}>OK</option>
+              <option value="damaged" {{selectOptions comp.status selected="damaged"}}>Damaged</option>
+              <option value="destroyed" {{selectOptions comp.status selected="destroyed"}}>Destroyed</option>
+            </select>
+            <button type="button" class="vcs-del-btn" data-key="{{key}}" data-type="supplemental" data-action="delete-component">✕</button>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB: CREW
+  ════════════════════════════════════════════════════════════ -->
+  <section class="vcs-tab-content tab-crew" style="display:none;">
+
+    <div class="vcs-two-col">
+
+      <div class="vcs-card">
+        <div class="vcs-card-title">👑 Command Staff</div>
+        <div class="vcs-component-list">
+
+          <div class="vcs-crew-row">
+            <span class="vcs-crew-role">Lord-Captain</span>
+            <input type="text" name="system.crew.captain.name" value="{{system.crew.captain.name}}" placeholder="Name"/>
+            <input type="number" name="system.crew.captain.command" value="{{system.crew.captain.command}}" placeholder="Cmd" style="width:50px;"/>
+          </div>
+
+          <div class="vcs-crew-row">
+            <span class="vcs-crew-role">First Officer</span>
+            <input type="text" name="system.crew.firstOfficer.name" value="{{system.crew.firstOfficer.name}}" placeholder="Name"/>
+            <input type="number" name="system.crew.firstOfficer.command" value="{{system.crew.firstOfficer.command}}" placeholder="Cmd" style="width:50px;"/>
+          </div>
+
+          <div class="vcs-crew-row">
+            <span class="vcs-crew-role">Navigator</span>
+            <input type="text" name="system.crew.navigator.name" value="{{system.crew.navigator.name}}" placeholder="Name"/>
+            <input type="number" name="system.crew.navigator.navigate" value="{{system.crew.navigator.navigate}}" placeholder="Nav" style="width:50px;"/>
+          </div>
+
+          <div class="vcs-crew-row">
+            <span class="vcs-crew-role">Helmsman</span>
+            <input type="text" name="system.crew.helmsman.name" value="{{system.crew.helmsman.name}}" placeholder="Name"/>
+            <input type="number" name="system.crew.helmsman.pilot" value="{{system.crew.helmsman.pilot}}" placeholder="Plt" style="width:50px;"/>
+          </div>
+
+          <div class="vcs-crew-row">
+            <span class="vcs-crew-role">Enginseer Prime</span>
+            <input type="text" name="system.crew.enginseer.name" value="{{system.crew.enginseer.name}}" placeholder="Name"/>
+            <input type="number" name="system.crew.enginseer.techUse" value="{{system.crew.enginseer.techUse}}" placeholder="Tch" style="width:50px;"/>
+          </div>
+
+          <div class="vcs-crew-row">
+            <span class="vcs-crew-role">Missionary / Chaplain</span>
+            <input type="text" name="system.crew.chaplain.name" value="{{system.crew.chaplain.name}}" placeholder="Name"/>
+            <input type="number" name="system.crew.chaplain.wp" value="{{system.crew.chaplain.wp}}" placeholder="WP" style="width:50px;"/>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="vcs-card">
+        <div class="vcs-card-title">📊 Crew Statistics</div>
+        <div class="vcs-profile-grid">
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Total Complement</span>
+            <input class="vcs-profile-val" type="text" name="system.crew.complement" value="{{system.crew.complement}}" placeholder="e.g. 25,000"/>
+          </div>
+          <div class="vcs-profile-stat">
+            <span class="vcs-profile-label">Crew Quality</span>
+            <select name="system.crew.quality">
+              <option value="conscript">Conscript</option>
+              <option value="pressed">Pressed</option>
+              <option value="competent">Competent</option>
+              <option value="crack">Crack</option>
+              <option value="elite">Elite</option>
+              <option value="legendary">Legendary</option>
+            </select>
+          </div>
+        </div>
+        <div class="vcs-card-title" style="margin-top:12px;">📝 Notes</div>
+        <textarea name="system.crew.notes" class="vcs-notes" placeholder="Crew history, notable events, awards...">{{system.crew.notes}}</textarea>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB: HISTORY & SPECIAL RULES
+  ════════════════════════════════════════════════════════════ -->
+  <section class="vcs-tab-content tab-history" style="display:none;">
+
+    <div class="vcs-two-col">
+
+      <div class="vcs-card">
+        <div class="vcs-card-title">📜 Ship History</div>
+        <textarea name="system.history" class="vcs-notes vcs-notes-tall" placeholder="Record the history of this vessel — its campaigns, victories, defeats, and the legends told about it...">{{system.history}}</textarea>
+      </div>
+
+      <div class="vcs-card">
+        <div class="vcs-card-title">⚡ Machine Spirit & Special Rules</div>
+        <div class="vcs-component-list">
+          <div class="vcs-field-group" style="margin-bottom:8px;">
+            <label class="vcs-field-label">Machine Spirit Disposition</label>
+            <select name="system.machineSpirit">
+              <option value="none">None / Dormant</option>
+              <option value="wrathful">Wrathful (+5 Crew BS, -5 Manoeuvrability)</option>
+              <option value="aggressive">Aggressive (Reroll one damage die per combat)</option>
+              <option value="dutiful">Dutiful (+5 all repair tests)</option>
+              <option value="fearful">Fearful (-5 Crew morale checks)</option>
+              <option value="ancient">Ancient & Wise (+10 Warp Navigation)</option>
+            </select>
+          </div>
+          <div class="vcs-field-group">
+            <label class="vcs-field-label">Special Rules / Past Histories</label>
+            <textarea name="system.specialRules" class="vcs-notes vcs-notes-tall" placeholder="e.g. Storied Vessel: +5 Command when crew below 50%&#10;Haunted: Crew morale tests at -10 in the Warp&#10;Death Cult: Crew do not rout until Morale reaches 0">{{system.specialRules}}</textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="vcs-card vcs-card-full">
+      <div class="vcs-card-title">🏆 Achievements & Profit Factor</div>
+      <div class="vcs-skills-grid">
+        <div class="vcs-skill">
+          <label>Profit Factor Contribution</label>
+          <input type="number" name="system.profitFactor" value="{{system.profitFactor}}" min="0"/>
+        </div>
+        <div class="vcs-skill">
+          <label>Renown</label>
+          <select name="system.renown">
+            <option value="unknown">Unknown</option>
+            <option value="recognised">Recognised</option>
+            <option value="respected">Respected</option>
+            <option value="feared">Feared</option>
+            <option value="legendary">Legendary</option>
+          </select>
+        </div>
+        <div class="vcs-skill">
+          <label>Achievements</label>
+          <input type="text" name="system.achievements" value="{{system.achievements}}" placeholder="e.g. Slew Rok-Killa, 3rd Battle of Calixis"/>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</form>

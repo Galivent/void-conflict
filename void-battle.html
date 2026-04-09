@@ -1,0 +1,76 @@
+<div class="void-battle-app">
+
+  <div class="vba-header">
+    <div class="vba-title">⚔ VOID CONFLICT — TACTICAL DISPLAY</div>
+    <div class="vba-round-tracker">
+      Round <span id="vba-round">{{round}}</span>
+      <button type="button" id="vba-next-round">Next Round ▶</button>
+    </div>
+    <div class="vba-initiative">Initiative: <span id="vba-initiative">{{initiative}}</span></div>
+    <button type="button" id="vba-close" class="vba-close-btn">✕ Close</button>
+  </div>
+
+  <div class="vba-body">
+
+    <!-- LEFT: Active Ship Controls -->
+    <div class="vba-left">
+      <div class="vba-section-title">Active Vessel</div>
+
+      <div class="vba-ship-selector">
+        <select id="vba-active-ship">
+          {{#each ships as |ship|}}
+          <option value="{{ship.id}}">{{ship.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="vba-stat-block" id="vba-active-stats">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="vba-section-title">Actions This Round</div>
+      <div class="vba-actions">
+        <button type="button" class="vba-action" data-action="move">🚀 Move</button>
+        <button type="button" class="vba-action" data-action="turn">🔄 Turn</button>
+        <button type="button" class="vba-action" data-action="lock-on">🎯 Lock On</button>
+        <button type="button" class="vba-action" data-action="evasive">💨 Evasive</button>
+        <button type="button" class="vba-action vba-danger" data-action="broadside">⚔ Broadside</button>
+        <button type="button" class="vba-action vba-danger" data-action="torpedo">🚀 Torpedo</button>
+        <button type="button" class="vba-action vba-danger" data-action="ram">⚡ Ram</button>
+        <button type="button" class="vba-action" data-action="repair">🔧 Repair</button>
+        <button type="button" class="vba-action" data-action="brace">🛡 Brace</button>
+        <button type="button" class="vba-action" data-action="withdraw">🏳 Withdraw</button>
+      </div>
+    </div>
+
+    <!-- CENTER: Battle Map -->
+    <div class="vba-map-container">
+      <canvas id="vba-battle-canvas"></canvas>
+      <div class="vba-map-legend">
+        <span class="vba-legend-item vba-legend-imperium">■ Imperium</span>
+        <span class="vba-legend-item vba-legend-chaos">■ Chaos</span>
+        <span class="vba-legend-item vba-legend-neutral">■ Neutral</span>
+        <span>Scale: 1 square = 1 VU</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Combat Log -->
+    <div class="vba-right">
+      <div class="vba-section-title">Strategium Log</div>
+      <div class="vba-log" id="vba-log">
+        <div class="vba-log-entry">Void battle initiated. All vessels to battle stations.</div>
+      </div>
+      <div class="vba-section-title">Dice</div>
+      <div class="vba-dice-panel">
+        <div class="vba-dice-row">
+          <button type="button" class="vba-die" data-sides="10">d10</button>
+          <button type="button" class="vba-die" data-sides="100">d%</button>
+          <button type="button" class="vba-die" data-sides="5">d5</button>
+        </div>
+        <div class="vba-dice-result" id="vba-dice-result">—</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
