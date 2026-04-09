@@ -11,7 +11,7 @@ A Foundry VTT module for **Dark Heresy 2e** with **Rogue Trader** void ship comb
 ## Installation
 Paste this URL into Foundry → Add-on Modules → Install Module → Manifest URL:
 ```
-https://raw.githubusercontent.com/YOURUSERNAME/void-conflict/main/module.json
+https://raw.githubusercontent.com/Galivent/void-conflict/main/module.json
 ```
 
 ## How to Use
