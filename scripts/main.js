@@ -89,7 +89,7 @@ class VoidShipDataModel extends foundry.abstract.TypeDataModel {
 
       // ── Ship profile
       class:           new fields.StringField({ initial: "Sword-class" }),
-      type:            new fields.StringField({ initial: "frigate" }),
+      shipType:        new fields.StringField({ initial: "frigate" }),
       faction:         new fields.StringField({ initial: "imperium" }),
       speed:           new fields.NumberField({ initial: 6, min: 0 }),
       manoeuvrability: new fields.NumberField({ initial: 10, min: -30, max: 60 }),
