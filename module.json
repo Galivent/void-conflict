@@ -7,11 +7,11 @@
     "minimum": "11",
     "verified": "12"
   },
-  "authors": [{ "name": "Your Name Here" }],
+  "authors": [{ "name": "Claude AI / Galivent" }],
   "esmodules": ["scripts/main.js"],
   "styles": ["styles/void.css"],
   "languages": [{ "lang": "en", "name": "English", "path": "lang/en.json" }],
-  "url": "https://github.com/YOURUSERNAME/void-conflict",
-  "manifest": "https://raw.githubusercontent.com/YOURUSERNAME/void-conflict/main/module.json",
-  "download": "https://github.com/YOURUSERNAME/void-conflict/archive/refs/heads/main.zip"
+  "url": "https://github.com/Galivent/void-conflict",
+  "manifest": "https://raw.githubusercontent.com/Galivent/void-conflict/main/module.json",
+  "download": "https://github.com/Galivent/void-conflict/archive/refs/heads/main.zip"
 }
