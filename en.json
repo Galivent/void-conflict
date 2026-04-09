@@ -1,0 +1,16 @@
+{
+  "VOIDCONFLICT.SheetLabel": "Void Ship",
+  "VOIDCONFLICT.HullIntegrity": "Hull Integrity",
+  "VOIDCONFLICT.VoidShields": "Void Shields",
+  "VOIDCONFLICT.CrewIntegrity": "Crew Integrity",
+  "VOIDCONFLICT.Morale": "Morale",
+  "VOIDCONFLICT.Speed": "Speed",
+  "VOIDCONFLICT.Manoeuvrability": "Manoeuvrability",
+  "VOIDCONFLICT.DetectionRating": "Detection Rating",
+  "VOIDCONFLICT.TurretRating": "Turret Rating",
+  "VOIDCONFLICT.Armour": "Armour",
+  "VOIDCONFLICT.Components": "Components",
+  "VOIDCONFLICT.Weapons": "Weapons",
+  "VOIDCONFLICT.History": "History & Special Rules",
+  "VOIDCONFLICT.VoidBattle": "Open Void Battle"
+}
