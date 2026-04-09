@@ -297,8 +297,6 @@ class VoidShipActor extends Actor {
 
 // Register Actor class
 Hooks.once("init", () => {
-  // CONFIG.Actor.documentClass = VoidShipActor; // Only if you want it global
-  // Better: register just for voidship type
   CONFIG.Actor.typeLabels = CONFIG.Actor.typeLabels || {};
   CONFIG.Actor.typeLabels["voidship"] = "Void Ship";
 });
