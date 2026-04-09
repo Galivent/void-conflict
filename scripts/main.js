@@ -144,7 +144,7 @@ Hooks.once("init", () => {
 
 // ── 3. ACTOR CLASS ───────────────────────────────────────────────
 
-class VoidShipActor extends Actor {
+class VCShipActions extends Actor {
 
   /** Percentage helpers for template bars */
   get hullPercent()   { return this._pct(this.system.hull); }
