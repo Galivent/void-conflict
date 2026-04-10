@@ -15,7 +15,7 @@ Hooks.once("init", () => {
     label: "Void Ship Sheet"
   });
 
-  Handlebars.registerHelper("vcSelectOptions", function(value, options) {
+  Handlebars.registerHelper("SelectOptions", function(value, options) {
     return value === options.hash.selected ? "selected" : "";
   });
 });
