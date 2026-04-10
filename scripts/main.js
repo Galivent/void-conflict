@@ -94,7 +94,7 @@ class VoidShipSheet extends ActorSheet {
       classes: ["void-conflict", "sheet", "actor"],
       template: "modules/void-conflict/templates/ship-sheet.html",
       width: 820, height: 680,
-      tabs: [{ navSelector: ".vcs-tabs", contentSelector: ".vcs-tab-body", initial: "stats" }],
+      tabs: [{ navSelector: ".vcs-tabs", contentSelector: ".vcs-tab-content", initial: "stats" }],
       resizable: true
     });
   }
