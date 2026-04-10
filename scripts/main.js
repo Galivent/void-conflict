@@ -20,6 +20,16 @@ Hooks.once("init", () => {
   });
 });
 
+Hooks.once("setup", () => {
+  if (docClass && docClass.prototype.prepareData;) {
+    const_original = docClass.prototype.prepareData;
+    docClass.prototype.prepareData = function() {
+      if (this.type = "voidship") return;
+      return _original.call(this);
+    };
+  };
+});
+
 Hooks.once("ready", () => {
   window.VoidConflict = { openBattle: () => new VoidBattleApp().render(true) };
   console.log("Void Conflict | Ready.");
